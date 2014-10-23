@@ -16,6 +16,67 @@ create table users (
     created datetime,
     modified datetime
 );
+
+create table project_sheet (
+    id int not null auto_increment primary key,
+    report_month date,
+    report_company varchar(32),
+    report_organization varchar(32),
+    report_name varchar(32),
+    report_timeunit time,
+    report_begintime time,
+    report_endtime time,
+    report_intervaltime varchar(16),
+    project_name varchar(128),
+    project_company varchar(128),
+    google_user_id varchar(30),
+    created datetime,
+    modified datetime
+);
+
+create table project_worktime (
+    id int not null auto_increment primary key,
+    project_date date,
+    project_begintime time,
+    project_endtime time,
+    project_intervaltime1 time,
+    project_intervaltime2 time,
+    project_status varchar(16),
+    project_notes varchar(255),
+    project_substitute_holiday date,
+    project_approved boolean,
+    is_holiday boolean,
+    google_user_id varchar(30),
+    created datetime,
+    modified datetime
+);
+
+create table house_worktime (
+    id int not null auto_increment primary key,
+    house_date date,
+    house_begintime time,
+    house_endtime time,
+    house_intervaltime1 time,
+    house_intervaltime2 time,
+    house_status varchar(16),
+    house_notes varchar(255),
+    house_substitute_holiday date,
+    house_approved boolean,
+    is_holiday boolean,
+    google_user_id varchar(30),
+    created datetime,
+    modified datetime
+);
+
+create table holiday_master (
+    id int not null auto_increment primary key,
+    holiday_date date,
+    holiday_notes varchar(16),
+    google_user_id varchar(30),
+    created datetime,
+    modified datetime
+);
+
 */
 
 define('DSN', 'mysql:host=localhost;dbname=monthly_report_checker');

@@ -14,7 +14,7 @@ if (!isset($_SESSION['me'])) {
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>ホーム画面</title>
 </head>
 <body>
@@ -22,5 +22,19 @@ if (!isset($_SESSION['me'])) {
 <p><?php echo h($_SESSION['me']['google_name']); ?>(<?php echo h($_SESSION['me']['google_email']); ?>)の
 googleアカウントでログインしています。</p>
 <p><a href="logout.php">[ログアウト]</a></p>
+<h2>チェックする月末申請書をアップロード</h2>
+<form action="upload.php" method="post" enctype="multipart/form-data">
+  ファイル：<br />
+  <input type="file" name="upfile" size="30" /><br />
+  <br />
+  <input type="submit" value="アップロード" />
+</form>
+<h2>メッセージ</h2>
+<?php
+foreach($_SESSION['msg'] as $s) {
+    echo "<p>" . $s . "</p>";
+}
+$_SESSION['msg'] = null;
+?>
 </body>
 </html>

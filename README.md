@@ -10,3 +10,5 @@ MonthlyReportChecker
 休日の取得はここ参考にしてGoogleカレンダーからとってくる
 http://gomokuankake.com/2013/04/08/3403/
 
+ファイルのアップロードはこのへんを参照
+http://www.php-labo.net/tutorial/php/upload.html

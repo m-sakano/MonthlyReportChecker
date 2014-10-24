@@ -88,6 +88,8 @@ define('CLIENT_SECRET', 'd9HYUCpQOnA_YkvZDJAilkK1');
 
 define('SITE_URL', 'http://www.chemicalbrain.net/MonthlyReportChecker/');
 
+define('LOG_FILE', dirname(__FILE__) . '/app.log');
+
 error_reporting(E_ALL &~E_NOTICE);
 
 session_set_cookie_params(0, '/MonthlyReportChecker/');

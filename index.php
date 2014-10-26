@@ -34,7 +34,7 @@ googleアカウントでログインしています。</p>
 foreach($_SESSION['msg'] as $s) {
     echo "<p>" . $s . "</p>";
 }
-$_SESSION['msg'] = null;
+unset($_SESSION['msg']);
 ?>
 </body>
 </html>

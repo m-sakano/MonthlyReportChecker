@@ -12,3 +12,9 @@ http://gomokuankake.com/2013/04/08/3403/
 
 ファイルのアップロードはこのへんを参照
 http://www.php-labo.net/tutorial/php/upload.html
+
+PHPExcelでセルの値取り出しはこのへんを参照
+http://c-brains.jp/blog/wsg/09/09/10-130907.php
+
+PHPExcelで取り出した時刻を日付形式に変換するときはこのへんを参照
+http://ueo.pupu.jp/blog/archive222-php/

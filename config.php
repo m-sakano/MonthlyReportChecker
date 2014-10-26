@@ -1,7 +1,7 @@
 <?php
 
 /*
-create database monthly_report_checker;
+create database monthly_report_checker default character set utf8;
 grant all on monthly_report_checker.* to dbuser@localhost identified by 'asdfasdf';
 
 use monthly_report_checker
@@ -20,16 +20,16 @@ create table users (
 create table project_sheet (
     id int not null auto_increment primary key,
     report_month date,
-    report_company varchar(32),
-    report_organization varchar(32),
-    report_name varchar(32),
+    report_company varchar(255),
+    report_organization varchar(255),
+    report_name varchar(255),
     report_timeunit time,
     report_begintime time,
     report_endtime time,
-    report_intervaltime varchar(16),
-    project_name varchar(128),
-    project_company varchar(128),
-    google_user_id varchar(30),
+    report_intervaltime varchar(255),
+    project_name varchar(255),
+    project_company varchar(255),
+    google_email varchar(255),
     created datetime,
     modified datetime
 );
@@ -41,12 +41,29 @@ create table project_worktime (
     project_endtime time,
     project_intervaltime1 time,
     project_intervaltime2 time,
-    project_status varchar(16),
+    project_status varchar(255),
     project_notes varchar(255),
     project_substitute_holiday date,
     project_approved boolean,
     is_holiday boolean,
-    google_user_id varchar(30),
+    google_email varchar(255),
+    created datetime,
+    modified datetime
+);
+
+create table house_sheet (
+    id int not null auto_increment primary key,
+    report_month date,
+    report_company varchar(255),
+    report_organization varchar(255),
+    report_name varchar(255),
+    report_timeunit time,
+    report_begintime time,
+    report_endtime time,
+    report_intervaltime varchar(255),
+    project_name varchar(255),
+    project_company varchar(255),
+    google_email varchar(255),
     created datetime,
     modified datetime
 );
@@ -58,12 +75,12 @@ create table house_worktime (
     house_endtime time,
     house_intervaltime1 time,
     house_intervaltime2 time,
-    house_status varchar(16),
+    house_status varchar(255),
     house_notes varchar(255),
     house_substitute_holiday date,
     house_approved boolean,
     is_holiday boolean,
-    google_user_id varchar(30),
+    google_email varchar(255),
     created datetime,
     modified datetime
 );
@@ -71,8 +88,8 @@ create table house_worktime (
 create table holiday_master (
     id int not null auto_increment primary key,
     holiday_date date,
-    holiday_notes varchar(16),
-    google_user_id varchar(30),
+    holiday_notes varchar(255),
+    google_email varchar(255),
     created datetime,
     modified datetime
 );

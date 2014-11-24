@@ -24,8 +24,9 @@ try {
 $dbh = connectDb();
 
 // 勤務報告書(案件先)
+// 読み込み
 require_once('reader_project.php');
-
+// チェック
 
 // ホーム画面へ飛ばす
 header('Location: '.SITE_URL);

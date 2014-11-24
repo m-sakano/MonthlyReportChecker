@@ -23,9 +23,14 @@ try {
 // Database接続
 $dbh = connectDb();
 
+// 過去のレコードがあったら削除する
+$sql = "delete from result where google_user_id = :id";
+$stmt = $dbh->prepare($sql);
+$stmt->execute(array(":id" => $_SESSION['me']['google_user_id']));
+
 // 勤務報告書(案件先)
 // 読み込み
-require_once('reader_project.php');
+require_once('check_project_header.php');
 // チェック
 
 // ホーム画面へ飛ばす

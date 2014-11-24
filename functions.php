@@ -19,6 +19,60 @@ function l($s) {
 }
 
 /**
+ * データベースにメッセージを書き込む
+ * $p   プライオリティ(INFO, WORNING, ERROR)
+ * $s   メッセージテキスト
+ */
+function m($p, $s) {
+    $dbh = connectDb();
+    $sql = "insert into result
+            (google_user_id, priority, message, created, modified)
+            values
+            (:id, :priority, :message, now(), now())";
+    $stmt = $dbh->prepare($sql);
+    $params = array(
+        ":id" => $_SESSION['me']['google_user_id'],
+        ":priority" => $p,
+        ":message" => $s
+    );
+    $stmt->execute($params);
+}
+
+/**
+ * メッセージをテーブルで表示する
+ * 
+ */
+function showMessages() {
+
+    $dbh = connectDb();
+    $sql = "select
+            priority, message, created
+            from result
+            where google_user_id = :id";
+    $stmt = $dbh->prepare($sql);
+    $params = array(":id" => $_SESSION['me']['google_user_id']);
+    $stmt->execute($params);
+
+    echo '<table class="table table-striped table-bordered">';
+    echo '<thead>';
+    echo '<tr><th>PRIORITY</th><th>MESSAGES</th><th>LAST CHECK</th></tr>';
+    echo '</thead>';
+    echo '<tbody>';
+    while($record = $stmt->fetch()) {
+        echo '<tr>';
+        echo '<td>'.$record[0].'</td>';
+        echo '<td>'.$record[1].'</td>';
+        echo '<td>'.$record[2].'</td>';
+        echo '</tr>';
+    }
+    echo '</tbody>';
+    echo '</table>';
+
+}
+
+
+
+/**
  * 指定したセルの文字列を取得する
  *
  * 色づけされたセルなどは cell->getValue()で文字列のみが取得できない

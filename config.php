@@ -94,7 +94,18 @@ create table holiday_master (
     modified datetime
 );
 
+create table result (
+    id int not null auto_increment primary key,
+    google_user_id varchar(30) unique,
+    priority varchar(10),
+    message text,
+    created datetime,
+    modified datetime
+);
+
 */
+
+setlocale(LC_ALL, 'ja_JP.UTF-8');
 
 define('DSN', 'mysql:host=localhost;dbname=monthly_report_checker');
 define('DB_USER', 'dbuser');

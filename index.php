@@ -44,10 +44,7 @@ if (!isset($_SESSION['me'])) {
 			</form>
 			<h2>メッセージ</h2>
 			<?php
-			foreach($_SESSION['msg'] as $s) {
-			    echo "<p>" . $s . "</p>";
-			}
-			unset($_SESSION['msg']);
+                showMessages();
 			?>
 		</div>
 		<div class="col-sm-3" style="background:white;">Side2</div>

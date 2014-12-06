@@ -96,28 +96,37 @@ create table holiday_master (
 
 create table result (
     id int not null auto_increment primary key,
-    google_user_id varchar(30) unique,
+    google_user_id varchar(30),
     priority varchar(10),
-    message text,
-    created datetime,
-    modified datetime
+    message varchar(255),
+    filename varchar(255),
+    created timestamp DEFAULT CURRENT_TIMESTAMP
 );
 
 */
 
-setlocale(LC_ALL, 'ja_JP.UTF-8');
+// SITE Settings
+define('SITE_URL', 'http://www.chemicalbrain.net/MonthlyReportChecker/');
+define('BRAND', 'MonthlyReportChecker');
 
+// Cookie Settings
+session_set_cookie_params(0, '/MonthlyReportChecker/');
+
+// MySQL Database Connection Settings
 define('DSN', 'mysql:host=localhost;dbname=monthly_report_checker');
 define('DB_USER', 'dbuser');
 define('DB_PASSWORD', 'asdfasdf');
 
+// Google Authentication Settings
 define('CLIENT_ID', '957141889512-hsiekeccn0vau8aur3e89igu0skn7kee.apps.googleusercontent.com');
 define('CLIENT_SECRET', 'd9HYUCpQOnA_YkvZDJAilkK1');
 
-define('SITE_URL', 'http://www.chemicalbrain.net/MonthlyReportChecker/');
 
+// DEBUG Settings
 define('LOG_FILE', dirname(__FILE__) . '/app.log');
-
 error_reporting(E_ALL &~E_NOTICE);
 
-session_set_cookie_params(0, '/MonthlyReportChecker/');
+// Server Locale
+setlocale(LC_ALL, 'ja_JP.UTF-8');
+
+

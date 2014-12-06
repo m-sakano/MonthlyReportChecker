@@ -14,8 +14,8 @@ function h($s) {
 
 function l($s) {
     $line = date('Y-m-d H:i:s') . " " . $_SESSION['me']['google_name'] . " " . $s . "\r\n";
-    // error_log($line, 3, LOG_FILE);
-    $_SESSION['msg'][] = $s;
+    error_log($line, 3, LOG_FILE);
+    //$_SESSION['msg'][] = $s;
 }
 
 /**
@@ -26,16 +26,18 @@ function l($s) {
 function m($p, $s) {
     $dbh = connectDb();
     $sql = "insert into result
-            (google_user_id, priority, message, created, modified)
+            (google_user_id, priority, message, filename)
             values
-            (:id, :priority, :message, now(), now())";
+            (:id, :priority, :message, :filename)";
     $stmt = $dbh->prepare($sql);
     $params = array(
-        ":id" => $_SESSION['me']['google_user_id'],
-        ":priority" => $p,
-        ":message" => $s
-    );
+    	    ":id" => $_SESSION['me']['google_user_id'],
+    	    ":priority" => $p,
+    	    ":message" => $s,
+    	    ":filename" => basename($_SESSION['file'])
+    	    );
     $stmt->execute($params);
+    $stmt->closeCursor();
 }
 
 /**
@@ -46,7 +48,7 @@ function showMessages() {
 
     $dbh = connectDb();
     $sql = "select
-            priority, message, created
+            priority, message, filename, created
             from result
             where google_user_id = :id";
     $stmt = $dbh->prepare($sql);
@@ -55,22 +57,24 @@ function showMessages() {
 
     echo '<table class="table table-striped table-bordered">';
     echo '<thead>';
-    echo '<tr><th>PRIORITY</th><th>MESSAGES</th><th>LAST CHECK</th></tr>';
+    echo '<tr><th>PRIORITY</th><th>MESSAGES</th><th>FILENAME</th><th>LAST CHECK</th></tr>';
     echo '</thead>';
     echo '<tbody>';
     while($record = $stmt->fetch()) {
-        echo '<tr>';
-        echo '<td>'.$record[0].'</td>';
-        echo '<td>'.$record[1].'</td>';
-        echo '<td>'.$record[2].'</td>';
-        echo '</tr>';
+        $line = '';
+        $line .= '<tr>';
+        $line .= '<td>'.$record['priority'].'</td>';
+        $line .= '<td>'.$record['message'].'</td>';
+        $line .= '<td>'.$record['filename'].'</td>';
+        $line .= '<td>'.$record['created'].'</td>';
+        $line .= '</tr>';
+        echo $line;
     }
+    $stmt->closeCursor();
     echo '</tbody>';
     echo '</table>';
 
 }
-
-
 
 /**
  * 指定したセルの文字列を取得する

@@ -27,11 +27,32 @@ $dbh = connectDb();
 $sql = "delete from result where google_user_id = :id";
 $stmt = $dbh->prepare($sql);
 $stmt->execute(array(":id" => $_SESSION['me']['google_user_id']));
+$stmt->closeCursor();
 
 // 勤務報告書(案件先)
-// 読み込み
 require_once('check_project_header.php');
-// チェック
+
+// チェック結果をDBに書き込む
+/*
+$sql = "insert into result
+        (google_user_id, priority, message, filename, created, modified)
+        values
+        (:id, :priority, :message, :filename, now(), now())";
+$stmt = $dbh->prepare($sql);
+
+$params = array(
+    ":id" => $_SESSION['me']['google_user_id'],
+    ":priority" => $p,
+    ":message" => $s,
+    ":filename" => basename($_SESSION['file'])
+);
+
+foreach ($params as $p) {
+	l(var_dump($p));
+    $stmt->execute($p);
+    $stmt->closeCursor();
+}
+*/
 
 // ホーム画面へ飛ばす
 header('Location: '.SITE_URL);

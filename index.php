@@ -22,7 +22,7 @@ if (!isset($_SESSION['me'])) {
     <link rel="shortcut icon" href="favicon.ico">
 </head>
 <body>
-
+<?php include_once(dirname(__FILE__) . '/analyticstracking.php'); ?>
 <div id="header" class="container" style="background:white;">
     <nav class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
@@ -54,7 +54,9 @@ if (!isset($_SESSION['me'])) {
 
 <div class="container">
 	<div class="row">
-		<div class="col-sm-3" style="background:white;">Side1</div>
+		<div class="col-sm-3" style="background:white;">
+		    <p> </p>
+		</div>
 		<div class="col-sm-6" style="background:white;">
 			<h1>月末申請書のオンラインチェック</h1>
 			<form action="upload.php" method="post" enctype="multipart/form-data">
@@ -75,7 +77,9 @@ if (!isset($_SESSION['me'])) {
 	</div>
 </div>
 
-<div id="footer" class="container" style="background:#C7243A;">footer</div>
+<div id="footer" class="container" style="background:#C7243A;">
+    <p> </p>
+</div>
 
 <!-- jQuery & bootstrap plugins-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
